@@ -5,7 +5,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ========== HELPERS ==========
+// HELPERS
 function cleanSeq(seq) {
   return seq.filter((val, idx, arr) => idx === 0 || val !== arr[idx - 1]);
 }
@@ -22,7 +22,7 @@ function generateTable(seq) {
   return { sequence: clean, table, total };
 }
 
-// ========== HDD ALGORITHMS ==========
+// HDD ALGORITHMS 
 
 // 1. FCFS
 function fcfs(requests, head) {
@@ -280,7 +280,7 @@ function anticipatory(requests, head, window = 50) {
   return generateTable(seq);
 }
 
-// ========== SSD ALGORITHMS ==========
+// SSD ALGORITHMS
 
 function ssdNoop(requests) {
   const sorted = [...requests].sort((a, b) => a.arrivalTime - b.arrivalTime);
@@ -398,7 +398,7 @@ function ssdKyber(requests) {
   return { schedule: result, totalWait, avgTurnaround };
 }
 
-// ========== API ==========
+// API
 app.post('/api/simulate', (req, res) => {
   try {
     const { hdd, ssd } = req.body;

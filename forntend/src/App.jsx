@@ -48,7 +48,7 @@ const SSD_NAMES = {
 
 const SPEED_PRESETS = { snail: 1800, slow: 1100, normal: 650, fast: 280 };
 
-// ─── HDD algorithm metadata for analysis ───────────────────────────────────
+// HDD algorithm metadata for analysis
 const HDD_META = {
   fcfs:        { full: 'First Come First Served',       strength: 'Simple, fair, no starvation',           weakness: 'High seek time, no optimization' },
   sstf:        { full: 'Shortest Seek Time First',      strength: 'Low avg seek time',                     weakness: 'Starvation of distant requests' },
@@ -71,9 +71,7 @@ const SSD_META = {
   kyber:      { full: 'Kyber',             strength: 'Low-latency reads, bounded write batching',  weakness: 'Less suitable for write-heavy loads' },
 };
 
-/* ────────────────────────────────────────────────────────────
-   HDDChart  (unchanged from original)
-──────────────────────────────────────────────────────────── */
+// HDDChart  (unchanged from original)
 function HDDChart({ sequence, maxCylinder, totalSteps, isActive }) {
   if (!sequence || sequence.length < 1) return null;
   const width = 320, height = 176, padding = 30;
@@ -114,9 +112,8 @@ function HDDChart({ sequence, maxCylinder, totalSteps, isActive }) {
   );
 }
 
-/* ────────────────────────────────────────────────────────────
-   SSDGantt  (unchanged from original)
-──────────────────────────────────────────────────────────── */
+
+// SSDGantt  (unchanged from original)
 function SSDGantt({ schedule, fullMaxEnd }) {
   if (!schedule || schedule.length === 0) {
     return (
@@ -244,9 +241,7 @@ function SSDCard({ name, data, stepIndex }) {
   );
 }
 
-/* ────────────────────────────────────────────────────────────
-   Mini horizontal bar chart for analysis
-──────────────────────────────────────────────────────────── */
+//Mini horizontal bar chart for analysis
 function MiniBar({ value, max, color, best }) {
   const pct = max > 0 ? (value / max) * 100 : 0;
   return (
@@ -260,9 +255,7 @@ function MiniBar({ value, max, color, best }) {
   );
 }
 
-/* ────────────────────────────────────────────────────────────
-   HDD Analysis Tab
-──────────────────────────────────────────────────────────── */
+// HDD Analysis Tab
 function HDDAnalysis({ results }) {
   const hddData = results?.hdd;
   if (!hddData) return null;
@@ -401,9 +394,7 @@ function HDDAnalysis({ results }) {
   );
 }
 
-/* ────────────────────────────────────────────────────────────
-   SSD Analysis Tab
-──────────────────────────────────────────────────────────── */
+// SSD Analysis Tab
 function SSDAnalysis({ results }) {
   const ssdData = results?.ssd;
   if (!ssdData) return null;
@@ -530,9 +521,7 @@ function SSDAnalysis({ results }) {
   );
 }
 
-/* ────────────────────────────────────────────────────────────
-   Main App
-──────────────────────────────────────────────────────────── */
+// Main App
 export default function App() {
   const [activeTab, setActiveTab] = useState('simulation');
   const [hdd, setHdd] = useState(DEFAULT_HDD);
@@ -658,7 +647,7 @@ export default function App() {
         </button>
       </div>
 
-      {/* ════════════════════════ SIMULATION TAB ════════════════════════ */}
+      {/* SIMULATION TAB */}
       {activeTab === 'simulation' && (
         <>
           <div className="input-section">
@@ -797,7 +786,7 @@ export default function App() {
         </>
       )}
 
-      {/* ════════════════════════ ANALYSIS TAB ════════════════════════ */}
+      {/* ANALYSIS TAB */}
       {activeTab === 'analysis' && (
         <div className="analysis-root">
           {!results ? (
@@ -827,7 +816,7 @@ export default function App() {
   );
 }
 
-/* ── Sub-tabs inside Analysis ── */
+/* Sub-tabs inside Analysis */
 function AnalysisSubTabs({ results }) {
   const [sub, setSub] = useState('hdd');
   return (
